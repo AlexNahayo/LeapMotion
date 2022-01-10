@@ -47,10 +47,7 @@ void setup() {
   
 }
 
-
-
 void draw() {
-   
  lights();
  // TRIGGER INITIALIZED
  if (Ambientregion == true) {
@@ -85,7 +82,6 @@ void draw() {
        }
       }
 
- 
    //****MULTI EFFECTS CODE****.
    
    //Panning/Cubecontroller(colour, rotation and position)/Gain and Lpf/Delay and chorus effect  with the right hand exclusively.
@@ -119,7 +115,7 @@ void draw() {
       fill(x,y,z);//TRYING TO MAP EACH COLOUR TO THE DIFFERENT CORDINATES.
       box(200,200,200);
       popMatrix();
-      
+    
        //FOR THE Right hand for amplitude. By moving from up and down.
       float dB = map(hand_position.y, height, 0, -6, 6);
       gain.setValue(dB);
@@ -133,13 +129,9 @@ void draw() {
      
   } 
 }
-
-
         //KEY TAP GESTURE FOR  STARTING THE MUSIC. 
     void leapOnKeyTapGesture(KeyTapGesture g){
-    
       PVector position         = g.getPosition(); 
-
       for (Hand hand : leap.getHands ()) {
           String hand_Type = hand.isLeft()  ? "Left hand" : "Right hand"; //left Hand can be used to trigger the stop the music with listed gesture.
      
@@ -151,14 +143,12 @@ void draw() {
       if (!recorded){
           fileplayer.play();
           recorder.beginRecord();
-          
           }
         }
     
       else {
           println("notintheregion "+Ambientregion);// beside "your able to check true or false statements
           Ambientregion = false;
-        
       }
 
       if (canPlay && Ambientregion && hand.isLeft() ) {
@@ -167,15 +157,13 @@ void draw() {
           fileplayer.loop();
           canPlay = false;
       }
-    
       if (!Ambientregion); {
           canPlay = true;
     }
   }
 }
     //STOP MUSIC WITH SWIPE GESTURE.(LEFT/RIGHT MOTION) 
-    void leapOnSwipeGesture(SwipeGesture g, int state){ 
-      
+    void leapOnSwipeGesture(SwipeGesture g, int state){
       PVector position         = g.getPosition();
 
       for (Hand hand : leap.getHands ()) {
@@ -191,7 +179,6 @@ void draw() {
           recorded = true;
           recorder.endRecord();
           recorder.save(); 
-        
         }
       }
  
@@ -207,22 +194,17 @@ void draw() {
   }
      
 } 
-
         //STOP MUSIC WITH MOUSE PRESSED.(IMCASE OF EMERGENCY DURING)
       void mousePressed(){
         fileplayer.pause();
       }
-
           //BACK AND FORWARD SKIP WITH CLOCKWISE/ANTICLOCKWISE MOTION.
       void leapOnCircleGesture(CircleGesture g, int state){
-        
         int     id               = g.getId();
         int     direction        = g.getDirection();
 
         for (Hand hand : leap.getHands ()) {
             String hand_Type = hand.isLeft()  ? "Left hand" : "Right hand"; // Left Hand can be used to trigger the skip the back and forward parameters exclusively.
-          
-          
             switch(direction){
               case 0: // Anticlockwise/Left gesture
                 if (hand.isLeft()){
